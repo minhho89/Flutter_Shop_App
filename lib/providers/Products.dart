@@ -65,6 +65,10 @@ class Products with ChangeNotifier {
             'creatorId': userId,
           }));
 
+      // TODO: DEBUG
+      print('/// Add Product function');
+      print(res.statusCode);
+
       Product p = Product(
         id: json.decode(res.body)['name'],
         title: product.title,

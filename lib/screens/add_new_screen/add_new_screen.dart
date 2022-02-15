@@ -11,6 +11,12 @@ class AddNewProductScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add new product'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.save),
+          ),
+        ],
       ),
       body: Body(),
     );
