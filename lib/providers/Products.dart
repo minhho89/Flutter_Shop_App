@@ -7,10 +7,13 @@ import 'package:shop_app_nojson/consts/constants.dart';
 import 'Product.dart';
 
 class Products with ChangeNotifier {
+  Products.name(this.userId, this.token, this._items);
+  Products();
+
   String? token;
   String? userId;
 
-  final List<Product> _items = [
+  List<Product>? _items = [
     Product(
       id: 'p1',
       title: 'Red Shirt',
@@ -46,11 +49,11 @@ class Products with ChangeNotifier {
   ];
 
   List<Product> get items {
-    return _items;
+    return _items!;
   }
 
   List<Product> get favoriteItems {
-    return _items.where((item) => item.isFavorite).toList();
+    return _items!.where((item) => item.isFavorite).toList();
   }
 
   Future<void> addProduct(Product product) async {
@@ -76,7 +79,7 @@ class Products with ChangeNotifier {
         price: product.price,
         imageUrl: product.imageUrl,
       );
-      _items.add(p);
+      _items!.add(p);
       notifyListeners();
     } catch (error) {
       print(error);
