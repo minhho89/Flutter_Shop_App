@@ -37,6 +37,7 @@ class _BodyState extends State<Body> {
                         decoration: const InputDecoration(
                           label: Text('Title'),
                         ),
+                        keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.next,
                         onSaved: (value) {
                           _p = Product(
@@ -52,6 +53,7 @@ class _BodyState extends State<Body> {
                         decoration: const InputDecoration(
                           label: Text('Price'),
                         ),
+                        keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.next,
                         onSaved: (value) {
                           _p = Product(
@@ -150,11 +152,11 @@ class _BodyState extends State<Body> {
           ],
         ),
       );
-
-      setState(() {
-        _isLoading = false;
-      });
-      Navigator.of(context).pop();
     }
+
+    setState(() {
+      _isLoading = false;
+    });
+    Navigator.of(context).pop();
   }
 }
