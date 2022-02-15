@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app_nojson/consts/routes.dart';
 import 'package:shop_app_nojson/providers/Auth.dart';
 import 'package:shop_app_nojson/providers/Cart.dart';
 import 'package:shop_app_nojson/providers/Products.dart';
-import 'package:shop_app_nojson/routes.dart';
 import 'package:shop_app_nojson/screens/auth_screen/auth_screen.dart';
 import 'package:shop_app_nojson/screens/products_overview_screen/products_overview_screen.dart';
 
