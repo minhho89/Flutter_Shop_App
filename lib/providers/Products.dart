@@ -72,7 +72,7 @@ class Products with ChangeNotifier {
         price: product.price,
         imageUrl: product.imageUrl,
       );
-      _items!.add(p);
+      _items.add(p);
       notifyListeners();
     } catch (error) {
       print(error);
