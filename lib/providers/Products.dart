@@ -7,7 +7,7 @@ import 'package:shop_app_nojson/consts/constants.dart';
 import 'Product.dart';
 
 class Products with ChangeNotifier {
-  Products.name(this.userId, this.token, this._items);
+  Products.auth(this.userId, this.token, this._items);
   Products();
 
   String? token;
@@ -57,8 +57,10 @@ class Products with ChangeNotifier {
   }
 
   Future<void> addProduct(Product product) async {
-    var url = Uri.parse('${serverUrl}/products.json?auth=$token');
+    var url = Uri.parse('$serverUrl/products.json?auth=$token');
     try {
+      print(product);
+
       final res = await http.post(url,
           body: json.encode({
             'title': product.title,
