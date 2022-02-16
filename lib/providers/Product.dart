@@ -21,4 +21,9 @@ class Product with ChangeNotifier {
     isFavorite = !isFavorite;
     notifyListeners();
   }
+
+  @override
+  String toString() {
+    return '$id | $title | $description| $price| $imageUrl';
+  }
 }
