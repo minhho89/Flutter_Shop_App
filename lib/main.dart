@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app_nojson/consts/routes.dart';
 import 'package:shop_app_nojson/providers/Auth.dart';
 import 'package:shop_app_nojson/providers/Cart.dart';
 import 'package:shop_app_nojson/providers/Products.dart';
-import 'package:shop_app_nojson/routes.dart';
 import 'package:shop_app_nojson/screens/auth_screen/auth_screen.dart';
 import 'package:shop_app_nojson/screens/products_overview_screen/products_overview_screen.dart';
 
@@ -21,6 +21,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: Products()),
         ChangeNotifierProvider.value(value: Cart()),
         ChangeNotifierProvider.value(value: Auth()),
+        ChangeNotifierProxyProvider<Auth, Products>(
+            create: (ctx) => Products(),
+            update: (ctx, auth, previousProducts) => Products.name(
+                auth.userId,
+                auth.token,
+                previousProducts == null ? [] : previousProducts.items))
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(

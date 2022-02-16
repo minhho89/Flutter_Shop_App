@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app_nojson/providers/Cart.dart';
+import 'package:shop_app_nojson/widgets/app_drawer.dart';
 
 import '../../widgets/badge.dart';
 import 'components/body.dart';
@@ -57,30 +58,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         showFav: _showOnlyFavorites,
       ),
       drawer: const AppDrawer(),
-    );
-  }
-}
-
-class AppDrawer extends StatelessWidget {
-  const AppDrawer({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: Column(
-        children: [
-          AppBar(
-            title: const Text('Hello!'),
-          ),
-          const Divider(),
-          const ListTile(
-            title: Text('Add new product'),
-            leading: Icon(Icons.add_business_outlined),
-          )
-        ],
-      ),
     );
   }
 }
