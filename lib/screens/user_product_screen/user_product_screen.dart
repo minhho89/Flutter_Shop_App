@@ -27,12 +27,12 @@ class UserProductScreen extends StatelessWidget {
       ),
       drawer: const AppDrawer(),
       body: FutureBuilder(
-        future: products.fetchAndSetProducts(),
+        future: products.fetchAndSetProducts(true),
         builder: (ctx, snapshot) => snapshot.connectionState ==
                 ConnectionState.waiting
             ? const Center(child: CircularProgressIndicator())
             : RefreshIndicator(
-                onRefresh: () => products.fetchAndSetProducts(),
+                onRefresh: () => products.fetchAndSetProducts(true),
                 child: Consumer<Products>(
                   builder: (ctx, productsData, _) => ListView.builder(
                     itemCount: products.items.length,
