@@ -24,6 +24,32 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
     description: '',
     imageUrl: '',
   );
+  var _isInit = true;
+  var _initValue = {
+    'title': '',
+    'price': '',
+    'description': '',
+    'imageUrl': '',
+  };
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      final String? productId =
+          ModalRoute.of(context)!.settings.arguments as String?;
+      if (productId != null) {
+        _p = Provider.of<Products>(context, listen: false).findById(productId);
+        _initValue = {
+          'title': _p.title,
+          'description': _p.description,
+          'price': _p.price.toString(),
+          'imageUrl': _p.imageUrl,
+        };
+        // _imageUrlController.text = _p.imageUrl;
+      }
+    }
+    _isInit = false;
+    super.didChangeDependencies();
+  }
 
   Future<void> _saveForm() async {
     bool isValid = _keyForm.currentState!.validate();

@@ -28,42 +28,44 @@ class UserProductScreen extends StatelessWidget {
       drawer: const AppDrawer(),
       body: FutureBuilder(
         future: products.fetchAndSetProducts(),
-        builder: (ctx, snapshot) =>
-            snapshot.connectionState == ConnectionState.waiting
-                ? const Center(child: CircularProgressIndicator())
-                : RefreshIndicator(
-                    onRefresh: () => products.fetchAndSetProducts(),
-                    child: Consumer<Products>(
-                      builder: (ctx, productsData, _) => ListView.builder(
-                        itemCount: products.items.length,
-                        itemBuilder: (context, index) => Card(
-                          child: ListTile(
-                            title: Text(products.items[index].title),
-                            leading: CircleAvatar(
-                              backgroundImage:
-                                  NetworkImage(products.items[index].imageUrl),
-                            ),
-                            subtitle: Text(
-                                '\$${products.items[index].price.toStringAsFixed(2)}'),
-                            trailing: FittedBox(
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.edit),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.delete),
-                                  )
-                                ],
+        builder: (ctx, snapshot) => snapshot.connectionState ==
+                ConnectionState.waiting
+            ? const Center(child: CircularProgressIndicator())
+            : RefreshIndicator(
+                onRefresh: () => products.fetchAndSetProducts(),
+                child: Consumer<Products>(
+                  builder: (ctx, productsData, _) => ListView.builder(
+                    itemCount: products.items.length,
+                    itemBuilder: (context, index) => Card(
+                      child: ListTile(
+                        title: Text(products.items[index].title),
+                        leading: CircleAvatar(
+                          backgroundImage:
+                              NetworkImage(products.items[index].imageUrl),
+                        ),
+                        subtitle: Text(
+                            '\$${products.items[index].price.toStringAsFixed(2)}'),
+                        trailing: FittedBox(
+                          child: Row(
+                            children: [
+                              IconButton(
+                                onPressed: () => Navigator.of(context)
+                                    .pushNamed(AddNewProductScreen.routeName,
+                                        arguments: products.items[index].id),
+                                icon: const Icon(Icons.edit),
                               ),
-                            ),
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.delete),
+                              )
+                            ],
                           ),
                         ),
                       ),
                     ),
                   ),
+                ),
+              ),
       ),
     );
   }

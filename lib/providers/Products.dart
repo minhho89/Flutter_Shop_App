@@ -141,4 +141,8 @@ class Products with ChangeNotifier {
       rethrow;
     }
   }
+
+  Product findById(String productId) {
+    return _items!.firstWhere((product) => product.id == productId);
+  }
 }
