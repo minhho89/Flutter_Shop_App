@@ -72,7 +72,7 @@ class Products with ChangeNotifier {
             title: productData['title'],
             description: productData['description'],
             price: productData['price'],
-            isFavorite: false, // DEBUG: fix this
+            isFavorite: false, // TODO: fix this
             imageUrl: productData['imageUrl'],
           ),
         );
