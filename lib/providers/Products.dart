@@ -89,6 +89,26 @@ class Products with ChangeNotifier {
     }
   }
 
+  Future<void> updateProduct(String productId, Product newProduct) async {
+    final productIndex =
+        _items!.indexWhere((product) => product.id == productId);
+    if (productIndex >= 0) {
+      var url = Uri.parse('$serverUrl/products/$productId.json?auth=$token');
+      await http.patch(url,
+          body: json.encode({
+            'title': newProduct.title,
+            'description': newProduct.description,
+            'imageUrl': newProduct.imageUrl,
+            'price': newProduct.price,
+          }));
+      _items![productIndex] = newProduct;
+      notifyListeners();
+      print('product update success');
+    } else {
+      print('update error...');
+    }
+  }
+
   Future<void> addProduct(Product product) async {
     var url = Uri.parse('$serverUrl/products.json?auth=$token');
     try {
