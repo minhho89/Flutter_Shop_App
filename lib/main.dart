@@ -4,7 +4,8 @@ import 'package:shop_app_nojson/consts/routes.dart';
 import 'package:shop_app_nojson/providers/Auth.dart';
 import 'package:shop_app_nojson/providers/Cart.dart';
 import 'package:shop_app_nojson/providers/Products.dart';
-import 'package:shop_app_nojson/screens/user_product_screen/user_product_screen.dart';
+import 'package:shop_app_nojson/screens/auth_screen/auth_screen.dart';
+import 'package:shop_app_nojson/screens/products_overview_screen/products_overview_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,10 +37,9 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           routes: routes,
-          // home: auth.isAuth()
-          //     ? const ProductsOverviewScreen()
-          //     : const AuthScreen(),
-          home: const UserProductScreen(),
+          home: auth.isAuth()
+              ? const ProductsOverviewScreen()
+              : const AuthScreen(),
         ),
       ),
     );
