@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+import 'package:shop_app_nojson/consts/constants.dart';
 
 class Product with ChangeNotifier {
   final String id;
@@ -17,9 +21,31 @@ class Product with ChangeNotifier {
     this.isFavorite = false,
   });
 
-  void toggleFavoriteStatus() {
+  void setFavoriteValue(bool newValue) {
+    isFavorite = newValue;
+    notifyListeners();
+  }
+
+  void toggleFavoriteStatus(String token, String userId) async {
+    final oldStatus = isFavorite;
     isFavorite = !isFavorite;
     notifyListeners();
+
+    var url =
+        Uri.parse('$serverUrl/userFavorites/$userId/$id.json?auth=$token');
+    try {
+      final response = await http.put(url,
+          body: json.encode(
+            isFavorite,
+          ));
+
+      if (response.statusCode >= 400) {
+        setFavoriteValue(oldStatus);
+      }
+    } catch (error) {
+      print('toggleFavoriteStatus error');
+      setFavoriteValue(oldStatus);
+    }
   }
 
   @override

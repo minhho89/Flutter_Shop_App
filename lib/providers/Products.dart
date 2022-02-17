@@ -60,6 +60,10 @@ class Products with ChangeNotifier {
     var filterString =
         filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
     var url = Uri.parse('$serverUrl/products.json?auth=$token&$filterString');
+    var favUrl = Uri.parse('$serverUrl/userFavorites/$userId.json?auth=$token');
+    final favoriteResponse = await http.get(favUrl);
+    final favoriteData = json.decode(favoriteResponse.body);
+
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -72,7 +76,8 @@ class Products with ChangeNotifier {
             title: productData['title'],
             description: productData['description'],
             price: productData['price'],
-            isFavorite: false, // TODO: fix this
+            isFavorite:
+                favoriteData == null ? false : favoriteData[productId] ?? false,
             imageUrl: productData['imageUrl'],
           ),
         );
