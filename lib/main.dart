@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_app_nojson/consts/routes.dart';
 import 'package:shop_app_nojson/providers/Auth.dart';
 import 'package:shop_app_nojson/providers/Cart.dart';
+import 'package:shop_app_nojson/providers/Oders.dart';
 import 'package:shop_app_nojson/providers/Products.dart';
 import 'package:shop_app_nojson/screens/auth_screen/auth_screen.dart';
 import 'package:shop_app_nojson/screens/products_overview_screen/products_overview_screen.dart';
@@ -27,7 +28,13 @@ class MyApp extends StatelessWidget {
               print('Auth token = ${auth.token}');
               return Products.auth(auth.userId, auth.token,
                   previousProducts == null ? [] : previousProducts.items);
-            })
+            }),
+        ChangeNotifierProxyProvider<Auth, Orders>(
+            create: (ctx) => Orders(),
+            update: (ctx, auth, previousOrders) => Orders.name(
+                auth.userId,
+                auth.token,
+                previousOrders == null ? [] : previousOrders.orders)),
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
