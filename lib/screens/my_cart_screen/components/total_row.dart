@@ -45,8 +45,8 @@ class _TotalRowState extends State<TotalRow> {
                       cartData.calculateTotalAmount());
                   setState(() {
                     _isLoading = false;
-                    cartData.items!.clear();
                   });
+                  cartData.clear();
                 },
           child: _isLoading
               ? const CircularProgressIndicator()
