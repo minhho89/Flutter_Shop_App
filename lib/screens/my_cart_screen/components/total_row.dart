@@ -47,6 +47,17 @@ class _TotalRowState extends State<TotalRow> {
                     _isLoading = false;
                   });
                   cartData.clear();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: const Text('Order has been placed'),
+                      duration: const Duration(seconds: 2),
+                      action: SnackBarAction(
+                        label: 'Okey',
+                        onPressed: () =>
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+                      ),
+                    ),
+                  );
                 },
           child: _isLoading
               ? const CircularProgressIndicator()
