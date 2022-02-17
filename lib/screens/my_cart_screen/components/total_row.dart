@@ -37,7 +37,6 @@ class _TotalRowState extends State<TotalRow> {
           onPressed: (cartData.calculateTotalAmount() <= 0 || _isLoading)
               ? null
               : () async {
-                  print('Order clicked'); // TODO: debug
                   setState(() {
                     _isLoading = true;
                   });
@@ -46,8 +45,8 @@ class _TotalRowState extends State<TotalRow> {
                       cartData.calculateTotalAmount());
                   setState(() {
                     _isLoading = false;
+                    cartData.items!.clear();
                   });
-                  cartData.items!.clear();
                 },
           child: _isLoading
               ? const CircularProgressIndicator()
