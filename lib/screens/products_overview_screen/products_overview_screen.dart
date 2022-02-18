@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app_nojson/providers/Cart.dart';
 import 'package:shop_app_nojson/widgets/app_drawer.dart';
+import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_button.dart';
 
 import '../../providers/Products.dart';
 import '../../widgets/badge.dart';
@@ -26,6 +27,8 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   bool _isLoading = false;
   bool _isInit = true;
 
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void didChangeDependencies() {
     if (_isInit) {
@@ -45,12 +48,22 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<Cart>(context, listen: false);
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
-        title: const Text('Products'),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text(
+          'Products',
+          style: TextStyle(color: Theme.of(context).primaryColor),
+        ),
+        leading: NeumorphicButton(
+          onPressed: () => scaffoldKey.currentState?.openDrawer(),
+          child: const Icon(Icons.menu),
+        ),
         actions: [
           PopupMenuButton(
+            color: Colors.red,
             onSelected: (FilterOptions selectedValue) {
               setState(() {
                 if (selectedValue == FilterOptions.favorites) {
