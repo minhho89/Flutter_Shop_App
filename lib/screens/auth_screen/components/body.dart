@@ -123,7 +123,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                             textFormField: TextFormField(
                               onSaved: (value) => _authData['email'] = value!,
                               decoration:
-                                  buildNeumorphicInputDecoration('email'),
+                                  buildNeumorphicInputDecoration('Email'),
                               keyboardType: TextInputType.emailAddress,
                               validator: (value) {
                                 bool isValid = RegExp(
@@ -181,7 +181,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                                   ),
                           NeumorphicButton(
                             onPressed: () => _submit(),
-                            buttonText: Text(
+                            child: Text(
                               _authMode == AuthMode.Login ? 'LOGIN' : 'SIGNUP',
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
