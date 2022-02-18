@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_app_nojson/models/http_exception.dart';
 
 import '../../../providers/Auth.dart';
+import '../../../widgets/neumorphic_text_input_field.dart';
 
 enum AuthMode {
   Login,
@@ -29,151 +30,115 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        children: [
-          const Text('Hello!'),
-          const Text('Welcome back'),
-          Container(
-            margin: const EdgeInsets.all(30),
-            // neumorphic design shadow
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  // top bottom right
-                  BoxShadow(
-                    color: Colors.grey.shade600,
-                    offset: const Offset(5, 5),
-                    blurRadius: 15,
-                  ),
-                  // bottom top left
-                  const BoxShadow(
-                    color: Colors.white,
-                    offset: Offset(-5, -5),
-                    blurRadius: 15,
-                  ),
-                ]),
-            child: Card(
-              color: Colors.grey[300],
-              elevation: 0,
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(3),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.white10.withOpacity(0.3),
-                                offset: Offset(-4, 1),
-                              ),
-                              BoxShadow(
-                                color: Colors.grey.shade600.withOpacity(0.2),
-                                offset: Offset(1, 1),
-                                blurRadius: 1,
-                              ),
-                              BoxShadow(
-                                color: Colors.grey.shade600.withOpacity(0.2),
-                                offset: Offset(-4, -4),
-                              ),
-                            ]),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              boxShadow: [
-                                // white hard border: bottom-right
-                                const BoxShadow(
-                                  color: Colors.white,
-                                  offset: Offset(0.1, 0.1),
-                                  blurRadius: 1,
-                                ),
-                                // grey hard border: top-left
-                                BoxShadow(
-                                  color: Colors.grey.shade500,
-                                  offset: Offset(-2, -2),
-                                  blurRadius: 4,
-                                ),
-                              ]),
-                          child: Container(
-                            padding: const EdgeInsets.all(3),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                boxShadow: [
-                                  // background color inner
-                                  BoxShadow(
-                                    color: Colors.white.withOpacity(0.8),
-                                    blurRadius: 5,
-                                  )
-                                ]),
-                            child: TextFormField(
-                              onSaved: (value) => _authData['email'] = value!,
-                              decoration: const InputDecoration(
-                                hintText: 'email',
-                                hintStyle: TextStyle(color: Colors.grey),
-                                border: InputBorder.none,
-                              ),
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
-                                bool isValid = RegExp(
-                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                                    .hasMatch(value!);
-                                if (value.isEmpty || !isValid) {
-                                  return 'Invalid email!';
-                                }
-                                return null;
-                              },
-                            ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Text('Hello!'),
+            const Text('Welcome back'),
+            Container(
+              margin: const EdgeInsets.all(30),
+              // neumorphic design shadow
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    // top bottom right
+                    BoxShadow(
+                      color: Colors.grey.shade600,
+                      offset: const Offset(5, 5),
+                      blurRadius: 15,
+                    ),
+                    // bottom top left
+                    const BoxShadow(
+                      color: Colors.white,
+                      offset: Offset(-5, -5),
+                      blurRadius: 15,
+                    ),
+                  ]),
+              child: Card(
+                color: Colors.grey[300],
+                elevation: 0,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        NeumorphicTextInputField(
+                          textFormField: TextFormField(
+                            onSaved: (value) => _authData['email'] = value!,
+                            decoration: buildNeumorphicInputDecoration('email'),
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              bool isValid = RegExp(
+                                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                  .hasMatch(value!);
+                              if (value.isEmpty || !isValid) {
+                                return 'Invalid email!';
+                              }
+                              return null;
+                            },
                           ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _passwordController,
-                        onSaved: (value) => _authData['password'] = value!,
-                        decoration: const InputDecoration(
-                          label: Text('Password'),
-                          hintText: 'Password',
+                        const SizedBox(
+                          height: 20,
                         ),
-                        obscureText: true,
-                      ),
-                      if (_authMode == AuthMode.SignUp)
-                        _isLoading
-                            ? const CircularProgressIndicator()
-                            : TextFormField(
-                                onSaved: (value) =>
-                                    _authData['password'] = value!,
-                                decoration: const InputDecoration(
-                                  label: Text('Confirm Password'),
-                                  hintText: 'Confirm your password',
+                        NeumorphicTextInputField(
+                          textFormField: TextFormField(
+                            controller: _passwordController,
+                            onSaved: (value) => _authData['password'] = value!,
+                            decoration:
+                                buildNeumorphicInputDecoration('Password'),
+                            obscureText: true,
+                          ),
+                        ),
+                        if (_authMode == AuthMode.SignUp)
+                          _isLoading
+                              ? const CircularProgressIndicator()
+                              : Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    NeumorphicTextInputField(
+                                      textFormField: TextFormField(
+                                        onSaved: (value) =>
+                                            _authData['password'] = value!,
+                                        decoration:
+                                            buildNeumorphicInputDecoration(
+                                                'confirm password'),
+                                        obscureText: true,
+                                        validator: _authMode == AuthMode.SignUp
+                                            ? (value) {
+                                                if (value !=
+                                                    _passwordController.text) {
+                                                  return 'Passwords do not match';
+                                                }
+                                              }
+                                            : null,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                obscureText: true,
-                                validator: _authMode == AuthMode.SignUp
-                                    ? (value) {
-                                        if (value != _passwordController.text) {
-                                          return 'Passwords do not match';
-                                        }
-                                      }
-                                    : null,
-                              ),
-                      TextButton(
-                        onPressed: () => _submit(),
-                        child: Text(
-                            _authMode == AuthMode.Login ? 'LOGIN' : 'SIGNUP'),
-                      ),
-                      TextButton(
-                        onPressed: _switchAuthMode,
-                        child: Text(
-                            '${_authMode == AuthMode.Login ? 'SIGN UP' : 'LOGIN'}'
-                            ' INSTEAD'),
-                      )
-                    ],
+                        TextButton(
+                          onPressed: () => _submit(),
+                          child: Text(
+                              _authMode == AuthMode.Login ? 'LOGIN' : 'SIGNUP'),
+                        ),
+                        TextButton(
+                          onPressed: _switchAuthMode,
+                          child: Text(
+                              '${_authMode == AuthMode.Login ? 'SIGN UP' : 'LOGIN'}'
+                              ' INSTEAD'),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
