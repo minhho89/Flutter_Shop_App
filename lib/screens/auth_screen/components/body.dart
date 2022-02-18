@@ -180,7 +180,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                                     ],
                                   ),
                           NeumorphicButton(
-                            onPressed: () => _submit(),
+                            onPressed: _submit,
                             child: Text(
                               _authMode == AuthMode.Login ? 'LOGIN' : 'SIGNUP',
                               style: TextStyle(

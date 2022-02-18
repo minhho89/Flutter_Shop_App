@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 
 class NeumorphicButton extends StatefulWidget {
   const NeumorphicButton(
-      {Key? key, required this.child, required this.onPressed})
+      {Key? key,
+      required this.child,
+      required this.onPressed,
+      this.width,
+      this.height})
       : super(key: key);
 
   final Widget child;
   final VoidCallback onPressed;
+  final double? width;
+  final double? height;
 
   @override
   _NeumorphicButtonState createState() => _NeumorphicButtonState();
@@ -18,7 +24,11 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onPressed,
+      // behavior: HitTestBehavior.translucent, // for leading of appbar
+      onTap: () {
+        print('inside button clicked');
+        widget.onPressed();
+      },
       onTapDown: (details) => setState(() => _pressing = true),
       onTapUp: (value) => setState(() => _pressing = false),
       onTapCancel: () => setState(() => _pressing = false),
@@ -26,9 +36,9 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
         duration: const Duration(milliseconds: 300),
         child: Container(
           alignment: Alignment.center,
-          height: 40,
-          width: double.infinity,
-          margin: const EdgeInsets.all(30),
+          height: widget.height,
+          width: widget.width,
+          // margin: const EdgeInsets.all(30),
           // neumorphic design shadow
           decoration: BoxDecoration(
             color: _pressing ? Colors.grey[350] : Colors.grey[300],

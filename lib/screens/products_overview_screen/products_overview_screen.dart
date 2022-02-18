@@ -52,14 +52,22 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       key: scaffoldKey,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.grey[300],
         title: Text(
           'Products',
           style: TextStyle(color: Theme.of(context).primaryColor),
         ),
-        leading: NeumorphicButton(
-          onPressed: () => scaffoldKey.currentState?.openDrawer(),
-          child: const Icon(Icons.menu),
+        leading: Padding(
+          padding: EdgeInsets.all(10),
+          child: NeumorphicButton(
+            onPressed: () {
+              print('clicked');
+              scaffoldKey.currentState?.openDrawer();
+            },
+            child: const Icon(
+              Icons.menu,
+            ),
+          ),
         ),
         actions: [
           PopupMenuButton(
