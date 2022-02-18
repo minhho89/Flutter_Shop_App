@@ -5,3 +5,4 @@ const String serverUrl =
     'https://shop-pet-prj-default-rtdb.asia-southeast1.firebasedatabase.app/';
 
 Color kBackgroundColor = Colors.grey[300]!;
+BorderRadius kProductCartBorderRadius = BorderRadius.circular(10);

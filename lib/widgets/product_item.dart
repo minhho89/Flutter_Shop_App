@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app_nojson/consts/constants.dart';
 
 import '../providers/Auth.dart';
 import '../providers/Cart.dart';
@@ -17,7 +18,7 @@ class ProductItem extends StatelessWidget {
     final auth = Provider.of<Auth>(context);
 
     return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: kProductCartBorderRadius,
       child: GridTile(
         footer: GridTileBar(
           backgroundColor: Colors.black87,

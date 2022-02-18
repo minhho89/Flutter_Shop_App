@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app_nojson/consts/constants.dart';
 import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_button.dart';
 
 import '../providers/Products.dart';
@@ -27,6 +28,7 @@ class ProductsGrid extends StatelessWidget {
             mainAxisSpacing: 10,
             childAspectRatio: 2 / 3),
         itemBuilder: (context, i) => NeumorphicButton(
+          borderRadius: kProductCartBorderRadius,
           onPressed: () {},
           child: ChangeNotifierProvider.value(
             value: products[i],

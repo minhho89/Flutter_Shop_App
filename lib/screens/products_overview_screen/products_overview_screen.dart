@@ -60,39 +60,9 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           'Products',
           style: TextStyle(color: Theme.of(context).primaryColor),
         ),
-        leading: Padding(
-          padding: const EdgeInsets.all(20),
-          child: NeumorphicButton(
-            initialBlurRadius: 5,
-            tappedBlurRadius: 3,
-            borderRadius: BorderRadius.circular(8.0),
-            onPressed: () {
-              scaffoldKey.currentState?.openDrawer();
-            },
-            child: const Icon(
-              Icons.menu,
-            ),
-          ),
-        ),
+        leading: buildLeadingButton(),
         actions: [
-          PopupMenuButton(
-            color: Colors.red,
-            onSelected: (FilterOptions selectedValue) {
-              setState(() {
-                if (selectedValue == FilterOptions.favorites) {
-                  _showOnlyFavorites = true;
-                } else {
-                  _showOnlyFavorites = false;
-                }
-              });
-            },
-            itemBuilder: (_) => [
-              const PopupMenuItem(
-                  child: Text('Show Favorite'), value: FilterOptions.favorites),
-              const PopupMenuItem(
-                  child: Text('Show All'), value: FilterOptions.all),
-            ],
-          ),
+          buildPopupMenuButton(),
           Consumer<Cart>(
             builder: (_, cart, child) => Badge(
               value: cart.quantityCount,
@@ -105,9 +75,50 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           : Body(
               showFav: _showOnlyFavorites,
             ),
-      drawer: Theme(
-        data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
-        child: const AppDrawer(),
+      drawer: buildDrawer(context),
+    );
+  }
+
+  Theme buildDrawer(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
+      child: const AppDrawer(),
+    );
+  }
+
+  PopupMenuButton<FilterOptions> buildPopupMenuButton() {
+    return PopupMenuButton(
+      color: Colors.red,
+      onSelected: (FilterOptions selectedValue) {
+        setState(() {
+          if (selectedValue == FilterOptions.favorites) {
+            _showOnlyFavorites = true;
+          } else {
+            _showOnlyFavorites = false;
+          }
+        });
+      },
+      itemBuilder: (_) => [
+        const PopupMenuItem(
+            child: Text('Show Favorite'), value: FilterOptions.favorites),
+        const PopupMenuItem(child: Text('Show All'), value: FilterOptions.all),
+      ],
+    );
+  }
+
+  Padding buildLeadingButton() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: NeumorphicButton(
+        initialBlurRadius: 5,
+        tappedBlurRadius: 3,
+        borderRadius: BorderRadius.circular(8.0),
+        onPressed: () {
+          scaffoldKey.currentState?.openDrawer();
+        },
+        child: const Icon(
+          Icons.menu,
+        ),
       ),
     );
   }
