@@ -32,68 +32,144 @@ class _BodyState extends State<Body> {
       child: Column(
         children: [
           const Text('Hello!'),
-          Text('Welcome back'),
-          Card(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    onSaved: (value) => _authData['email'] = value!,
-                    decoration: const InputDecoration(
-                      label: Text('Email'),
-                      hintText: 'Input your email',
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) {
-                      bool isValid = RegExp(
-                              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                          .hasMatch(value!);
-                      if (value.isEmpty || !isValid) {
-                        return 'Invalid email!';
-                      }
-                      return null;
-                    },
+          const Text('Welcome back'),
+          Container(
+            margin: const EdgeInsets.all(30),
+            // neumorphic design shadow
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  // top bottom right
+                  BoxShadow(
+                    color: Colors.grey.shade600,
+                    offset: const Offset(5, 5),
+                    blurRadius: 15,
                   ),
-                  TextFormField(
-                    controller: _passwordController,
-                    onSaved: (value) => _authData['password'] = value!,
-                    decoration: const InputDecoration(
-                      label: Text('Password'),
-                      hintText: 'Password',
-                    ),
-                    obscureText: true,
+                  // bottom top left
+                  const BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(-5, -5),
+                    blurRadius: 15,
                   ),
-                  if (_authMode == AuthMode.SignUp)
-                    _isLoading
-                        ? CircularProgressIndicator()
-                        : TextFormField(
-                            onSaved: (value) => _authData['password'] = value!,
-                            decoration: const InputDecoration(
-                              label: Text('Confirm Password'),
-                              hintText: 'Confirm your password',
+                ]),
+            child: Card(
+              color: Colors.grey[300],
+              elevation: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(3),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.white10.withOpacity(0.3),
+                                offset: Offset(-4, 1),
+                              ),
+                              BoxShadow(
+                                color: Colors.grey.shade600.withOpacity(0.2),
+                                offset: Offset(1, 1),
+                                blurRadius: 1,
+                              ),
+                              BoxShadow(
+                                color: Colors.grey.shade600.withOpacity(0.2),
+                                offset: Offset(-4, -4),
+                              ),
+                            ]),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              boxShadow: [
+                                // white hard border: bottom-right
+                                const BoxShadow(
+                                  color: Colors.white,
+                                  offset: Offset(0.1, 0.1),
+                                  blurRadius: 1,
+                                ),
+                                // grey hard border: top-left
+                                BoxShadow(
+                                  color: Colors.grey.shade500,
+                                  offset: Offset(-2, -2),
+                                  blurRadius: 4,
+                                ),
+                              ]),
+                          child: Container(
+                            padding: const EdgeInsets.all(3),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(3),
+                                boxShadow: [
+                                  // background color inner
+                                  BoxShadow(
+                                    color: Colors.white.withOpacity(0.8),
+                                    blurRadius: 5,
+                                  )
+                                ]),
+                            child: TextFormField(
+                              onSaved: (value) => _authData['email'] = value!,
+                              decoration: const InputDecoration(
+                                hintText: 'email',
+                                hintStyle: TextStyle(color: Colors.grey),
+                                border: InputBorder.none,
+                              ),
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (value) {
+                                bool isValid = RegExp(
+                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                                    .hasMatch(value!);
+                                if (value.isEmpty || !isValid) {
+                                  return 'Invalid email!';
+                                }
+                                return null;
+                              },
                             ),
-                            obscureText: true,
-                            validator: _authMode == AuthMode.SignUp
-                                ? (value) {
-                                    if (value != _passwordController.text) {
-                                      return 'Passwords do not match';
-                                    }
-                                  }
-                                : null,
                           ),
-                  TextButton(
-                    onPressed: () => _submit(),
-                    child:
-                        Text(_authMode == AuthMode.Login ? 'LOGIN' : 'SIGNUP'),
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _passwordController,
+                        onSaved: (value) => _authData['password'] = value!,
+                        decoration: const InputDecoration(
+                          label: Text('Password'),
+                          hintText: 'Password',
+                        ),
+                        obscureText: true,
+                      ),
+                      if (_authMode == AuthMode.SignUp)
+                        _isLoading
+                            ? const CircularProgressIndicator()
+                            : TextFormField(
+                                onSaved: (value) =>
+                                    _authData['password'] = value!,
+                                decoration: const InputDecoration(
+                                  label: Text('Confirm Password'),
+                                  hintText: 'Confirm your password',
+                                ),
+                                obscureText: true,
+                                validator: _authMode == AuthMode.SignUp
+                                    ? (value) {
+                                        if (value != _passwordController.text) {
+                                          return 'Passwords do not match';
+                                        }
+                                      }
+                                    : null,
+                              ),
+                      TextButton(
+                        onPressed: () => _submit(),
+                        child: Text(
+                            _authMode == AuthMode.Login ? 'LOGIN' : 'SIGNUP'),
+                      ),
+                      TextButton(
+                        onPressed: _switchAuthMode,
+                        child: Text(
+                            '${_authMode == AuthMode.Login ? 'SIGN UP' : 'LOGIN'}'
+                            ' INSTEAD'),
+                      )
+                    ],
                   ),
-                  TextButton(
-                    onPressed: _switchAuthMode,
-                    child: Text(
-                        '${_authMode == AuthMode.Login ? 'SIGN UP' : 'LOGIN'}'
-                        ' INSTEAD'),
-                  )
-                ],
+                ),
               ),
             ),
           )
