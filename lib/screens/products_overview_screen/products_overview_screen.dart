@@ -79,7 +79,10 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           : Body(
               showFav: _showOnlyFavorites,
             ),
-      drawer: const AppDrawer(),
+      drawer: Theme(
+        data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
+        child: const AppDrawer(),
+      ),
     );
   }
 }

@@ -18,7 +18,9 @@ class OrderScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('My Orders'),
       ),
-      drawer: AppDrawer(),
+      drawer: Theme(
+          data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
+          child: const AppDrawer(),),
       body: FutureBuilder(
         future: _refreshOrders(context),
         builder: (ctx, dataSnapshot) {

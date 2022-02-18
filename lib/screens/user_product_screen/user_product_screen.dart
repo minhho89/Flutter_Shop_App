@@ -25,7 +25,10 @@ class UserProductScreen extends StatelessWidget {
           ),
         ],
       ),
-      drawer: const AppDrawer(),
+      drawer: Theme(
+        data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
+        child: const AppDrawer(),
+      ),
       body: FutureBuilder(
         future: products.fetchAndSetProducts(true),
         builder: (ctx, snapshot) => snapshot.connectionState ==
