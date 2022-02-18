@@ -63,7 +63,8 @@ class NeumorphicTextInputField extends StatelessWidget {
 InputDecoration buildNeumorphicInputDecoration(String hintText) {
   return InputDecoration(
     hintText: hintText,
-    hintStyle: TextStyle(color: Colors.grey),
+    hintStyle: const TextStyle(color: Colors.grey),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
     border: InputBorder.none,
   );
 }

@@ -63,6 +63,7 @@ class _BodyState extends State<Body> {
                   child: Form(
                     key: _formKey,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         NeumorphicTextInputField(
                           textFormField: TextFormField(
@@ -120,10 +121,38 @@ class _BodyState extends State<Body> {
                                     ),
                                   ],
                                 ),
-                        TextButton(
-                          onPressed: () => _submit(),
-                          child: Text(
-                              _authMode == AuthMode.Login ? 'LOGIN' : 'SIGNUP'),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: BorderRadius.circular(30),
+                            boxShadow: [
+                              // top bottom right
+                              BoxShadow(
+                                color: Colors.grey.shade600,
+                                offset: const Offset(5, 5),
+                                blurRadius: 13,
+                              ),
+                              // bottom top left
+                              const BoxShadow(
+                                color: Colors.white,
+                                offset: Offset(-5, -5),
+                                blurRadius: 13,
+                              ),
+                            ],
+                          ),
+                          child: TextButton(
+                            onPressed: () => _submit(),
+                            child: Text(_authMode == AuthMode.Login
+                                ? 'LOGIN'
+                                : 'SIGNUP'),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
                         ),
                         TextButton(
                           onPressed: _switchAuthMode,
