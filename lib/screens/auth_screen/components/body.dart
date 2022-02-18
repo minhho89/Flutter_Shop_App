@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:shop_app_nojson/models/http_exception.dart';
 
 import '../../../providers/Auth.dart';
-import '../../../widgets/neumorphic_card.dart';
-import '../../../widgets/neumorphic_text_input_field.dart';
+import '../../../widgets/neumorphics/neumorphic_card.dart';
+import '../../../widgets/neumorphics/neumorphic_text_input_field.dart';
 
 enum AuthMode {
   Login,
@@ -34,8 +34,44 @@ class _BodyState extends State<Body> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const Text('Hello!'),
-            const Text('Welcome back'),
+            Container(
+              alignment: Alignment.centerRight,
+              child: NeumorphicCard(
+                shadowBlur: 20,
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.grey[300],
+                  ),
+                  child: Image.asset(
+                    'assets/img/logo.png',
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Hello!',
+                style: TextStyle(
+                    fontSize: Theme.of(context).textTheme.headline4!.fontSize,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Welcome back',
+                style: TextStyle(
+                  fontSize: Theme.of(context).textTheme.titleMedium!.fontSize,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             NeumorphicCard(
               shadowBlur: 15,
               child: Card(
@@ -130,9 +166,12 @@ class _BodyState extends State<Body> {
                           ),
                           child: TextButton(
                             onPressed: () => _submit(),
-                            child: Text(_authMode == AuthMode.Login
-                                ? 'LOGIN'
-                                : 'SIGNUP'),
+                            child: Text(
+                              _authMode == AuthMode.Login ? 'LOGIN' : 'SIGNUP',
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -141,8 +180,13 @@ class _BodyState extends State<Body> {
                         TextButton(
                           onPressed: _switchAuthMode,
                           child: Text(
-                              '${_authMode == AuthMode.Login ? 'SIGN UP' : 'LOGIN'}'
-                              ' INSTEAD'),
+                            '${_authMode == AuthMode.Login ? 'SIGN UP' : 'LOGIN'}'
+                            ' INSTEAD',
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.subtitle1!.color,
+                            ),
+                          ),
                         )
                       ],
                     ),

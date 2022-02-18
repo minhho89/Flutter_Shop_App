@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 class NeumorphicCard extends StatelessWidget {
   const NeumorphicCard(
-      {Key? key, required this.child, required this.shadowBlur})
+      {Key? key, required this.child, required this.shadowBlur, this.alignment})
       : super(key: key);
 
   final Widget child;
   final double shadowBlur;
+  final Alignment? alignment;
 
   @override
   Widget build(BuildContext context) {

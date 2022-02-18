@@ -40,14 +40,32 @@ class MyApp extends StatelessWidget {
         builder: (ctx, auth, _) => MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+          theme: buildThemeData(),
           routes: routes,
           home: auth.isAuth()
               ? const ProductsOverviewScreen()
               : const AuthScreen(),
         ),
+      ),
+    );
+  }
+
+  ThemeData buildThemeData() {
+    return ThemeData(
+      fontFamily: 'Lato',
+      primarySwatch: Colors.purple,
+      colorScheme: const ColorScheme(
+        secondary: Colors.deepOrange,
+        brightness: Brightness.light,
+        onError: Colors.redAccent,
+        onSecondary: Colors.orange,
+        onBackground: Colors.blueGrey,
+        error: Colors.red,
+        background: Colors.grey,
+        onSurface: Colors.yellowAccent,
+        surface: Colors.yellow,
+        primary: Colors.purple,
+        onPrimary: Colors.white,
       ),
     );
   }
