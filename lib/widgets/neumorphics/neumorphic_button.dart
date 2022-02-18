@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
 
 class NeumorphicButton extends StatefulWidget {
-  NeumorphicButton(
-      {Key? key,
-      required this.child,
-      required this.onPressed,
-      this.width,
-      this.height,
-      this.borderRadius = BorderRadius.zero})
-      : super(key: key);
+  NeumorphicButton({
+    Key? key,
+    required this.child,
+    required this.onPressed,
+    this.width,
+    this.height,
+    this.borderRadius = BorderRadius.zero,
+    this.initialOffset = 5,
+    this.tappedOffset = 3,
+    this.initialBlurRadius = 13,
+    this.tappedBlurRadius = 8,
+  }) : super(key: key);
 
   final Widget child;
   final VoidCallback onPressed;
   final double? width;
   final double? height;
   final BorderRadius borderRadius;
+  final double initialOffset;
+  final double tappedOffset;
+  final double initialBlurRadius;
+  final double tappedBlurRadius;
 
   @override
   _NeumorphicButtonState createState() => _NeumorphicButtonState();
@@ -48,25 +56,28 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
                 ? [
                     BoxShadow(
                       color: Colors.grey.shade600,
-                      offset: const Offset(3, 3),
+                      offset: Offset(widget.tappedOffset, widget.tappedOffset),
                       blurRadius: 8,
                     ),
-                    const BoxShadow(
+                    BoxShadow(
                       color: Colors.white,
-                      offset: Offset(-3, -3),
+                      offset: Offset(
+                          widget.tappedOffset * -1, widget.tappedOffset * -1),
                       blurRadius: 8,
                     ),
                   ]
                 : [
                     BoxShadow(
                       color: Colors.grey.shade600,
-                      offset: const Offset(5, 5),
+                      offset:
+                          Offset(widget.initialOffset, widget.initialOffset),
                       blurRadius: 13,
                     ),
                     // bottom top left
-                    const BoxShadow(
+                    BoxShadow(
                       color: Colors.white,
-                      offset: Offset(-5, -5),
+                      offset: Offset(
+                          widget.initialOffset * -1, widget.initialOffset * -1),
                       blurRadius: 13,
                     ),
                   ],

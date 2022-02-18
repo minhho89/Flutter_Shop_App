@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app_nojson/consts/constants.dart';
 import 'package:shop_app_nojson/providers/Cart.dart';
 import 'package:shop_app_nojson/widgets/app_drawer.dart';
 import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_button.dart';
@@ -37,7 +38,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       });
 
       Provider.of<Products>(context).fetchAndSetProducts().then((_) {
-        print('fetch done');
         setState(() {
           _isLoading = false;
         });
@@ -50,18 +50,23 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: kBackgroundColor,
       appBar: AppBar(
+        toolbarHeight: MediaQuery.of(context).size.height * 1 / 10,
+        leadingWidth: 75,
         elevation: 0,
-        backgroundColor: Colors.grey[300],
+        backgroundColor: kBackgroundColor,
         title: Text(
           'Products',
           style: TextStyle(color: Theme.of(context).primaryColor),
         ),
         leading: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(20),
           child: NeumorphicButton(
+            initialBlurRadius: 5,
+            tappedBlurRadius: 3,
+            borderRadius: BorderRadius.circular(8.0),
             onPressed: () {
-              print('clicked');
               scaffoldKey.currentState?.openDrawer();
             },
             child: const Icon(
