@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app_nojson/consts/constants.dart';
 import 'package:shop_app_nojson/models/http_exception.dart';
 
 import '../../../providers/Auth.dart';
@@ -22,7 +23,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
   bool _isLoading = false;
   AuthMode _authMode = AuthMode.Login;
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
   final Map<String, String> _authData = {
     'email': '',
@@ -45,8 +46,8 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
       duration: const Duration(milliseconds: 200),
     );
     _heightAnimation = Tween<Size>(
-            begin: const Size(double.infinity, 340),
-            end: const Size(double.infinity, 410))
+            begin: const Size(double.infinity, 300),
+            end: const Size(double.infinity, 390))
         .animate(CurvedAnimation(
             parent: _animationController, curve: Curves.easeIn));
     // _heightAnimation.addListener(() => setState(() {}));
@@ -60,13 +61,14 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             buildLogo(),
             buildGreetings(context),
             NeumorphicCard(
               shadowBlur: 15,
               child: Card(
-                color: Colors.grey[300],
+                color: kBackgroundColor,
                 elevation: 0,
                 child: AnimatedBuilder(
                   animation: _heightAnimation,
@@ -151,7 +153,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
             ),
             NeumorphicButton(
               borderRadius: BorderRadius.circular(8.0),
-              width: double.infinity,
+              width: MediaQuery.of(context).size.width * 0.5,
               height: 40,
               onPressed: _submit,
               child: Text(

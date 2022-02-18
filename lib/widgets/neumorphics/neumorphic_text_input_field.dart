@@ -4,15 +4,16 @@ class NeumorphicTextInputField extends StatelessWidget {
   const NeumorphicTextInputField({
     Key? key,
     required this.textFormField,
+    this.borderRadius = BorderRadius.zero,
   }) : super(key: key);
 
   final TextFormField textFormField;
+  final BorderRadius? borderRadius;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(3), boxShadow: [
+      decoration: BoxDecoration(borderRadius: borderRadius, boxShadow: [
         BoxShadow(
           color: Colors.white10.withOpacity(0.3),
           offset: const Offset(-4, 1),
@@ -45,8 +46,7 @@ class NeumorphicTextInputField extends StatelessWidget {
         ]),
         child: Container(
           padding: const EdgeInsets.all(3),
-          decoration:
-              BoxDecoration(borderRadius: BorderRadius.circular(3), boxShadow: [
+          decoration: BoxDecoration(borderRadius: borderRadius, boxShadow: [
             // background color inner
             BoxShadow(
               color: Colors.white.withOpacity(0.8),

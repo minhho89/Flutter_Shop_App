@@ -28,7 +28,6 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
     return GestureDetector(
       // behavior: HitTestBehavior.translucent, // for leading of appbar
       onTap: () {
-        print('inside button clicked');
         widget.onPressed();
       },
       onTapDown: (details) => setState(() => _pressing = true),

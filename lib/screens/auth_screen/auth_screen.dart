@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app_nojson/consts/constants.dart';
 
 import 'components/body.dart';
 
@@ -10,7 +11,7 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: kBackgroundColor,
       body: const Body(),
     );
   }
