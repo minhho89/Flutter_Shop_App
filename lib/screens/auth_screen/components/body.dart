@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_app_nojson/models/http_exception.dart';
 
 import '../../../providers/Auth.dart';
+import '../../../widgets/neumorphic_card.dart';
 import '../../../widgets/neumorphic_text_input_field.dart';
 
 enum AuthMode {
@@ -35,25 +36,8 @@ class _BodyState extends State<Body> {
           children: [
             const Text('Hello!'),
             const Text('Welcome back'),
-            Container(
-              margin: const EdgeInsets.all(30),
-              // neumorphic design shadow
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    // top bottom right
-                    BoxShadow(
-                      color: Colors.grey.shade600,
-                      offset: const Offset(5, 5),
-                      blurRadius: 15,
-                    ),
-                    // bottom top left
-                    const BoxShadow(
-                      color: Colors.white,
-                      offset: Offset(-5, -5),
-                      blurRadius: 15,
-                    ),
-                  ]),
+            NeumorphicCard(
+              shadowBlur: 15,
               child: Card(
                 color: Colors.grey[300],
                 elevation: 0,
@@ -151,7 +135,7 @@ class _BodyState extends State<Body> {
                                 : 'SIGNUP'),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         TextButton(
