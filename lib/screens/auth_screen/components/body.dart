@@ -198,43 +198,16 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                                           ),
                                         ],
                                       ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[300],
-                                  borderRadius: BorderRadius.circular(30),
-                                  boxShadow: [
-                                    // top bottom right
-                                    BoxShadow(
-                                      color: Colors.grey.shade600,
-                                      offset: const Offset(5, 5),
-                                      blurRadius: 13,
-                                    ),
-                                    // bottom top left
-                                    const BoxShadow(
-                                      color: Colors.white,
-                                      offset: Offset(-5, -5),
-                                      blurRadius: 13,
-                                    ),
-                                  ],
-                                ),
-                                child: NeumorphicButton(
-                                  onPressed: () => _submit(),
-                                  buttonText: Text(
-                                    _authMode == AuthMode.Login
-                                        ? 'LOGIN'
-                                        : 'SIGNUP',
-                                    style: TextStyle(
-                                      color: Theme.of(context).primaryColor,
-                                    ),
+                              NeumorphicButton(
+                                onPressed: () => _submit(),
+                                buttonText: Text(
+                                  _authMode == AuthMode.Login
+                                      ? 'LOGIN'
+                                      : 'SIGNUP',
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
                                   ),
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 20,
                               ),
                               TextButton(
                                 onPressed: _switchAuthMode,
