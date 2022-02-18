@@ -61,44 +61,8 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              alignment: Alignment.centerRight,
-              child: NeumorphicCard(
-                shadowBlur: 20,
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.grey[300],
-                  ),
-                  child: Image.asset(
-                    'assets/img/logo.png',
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
-              alignment: Alignment.topLeft,
-              child: Text(
-                'Hello!',
-                style: TextStyle(
-                    fontSize: Theme.of(context).textTheme.headline4!.fontSize,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
-              alignment: Alignment.topLeft,
-              child: Text(
-                'Welcome back',
-                style: TextStyle(
-                  fontSize: Theme.of(context).textTheme.titleMedium!.fontSize,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            buildLogo(),
+            buildGreetings(context),
             NeumorphicCard(
               shadowBlur: 15,
               child: Card(
@@ -114,101 +78,148 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                       padding: const EdgeInsets.symmetric(
                           vertical: 30, horizontal: 20),
                       child: ch),
-                  child: Form(
-                    key: _formKey,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          NeumorphicTextInputField(
-                            textFormField: TextFormField(
-                              onSaved: (value) => _authData['email'] = value!,
-                              decoration:
-                                  buildNeumorphicInputDecoration('Email'),
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value) {
-                                bool isValid = RegExp(
-                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                                    .hasMatch(value!);
-                                if (value.isEmpty || !isValid) {
-                                  return 'Invalid email!';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          NeumorphicTextInputField(
-                            textFormField: TextFormField(
-                              controller: _passwordController,
-                              onSaved: (value) =>
-                                  _authData['password'] = value!,
-                              decoration:
-                                  buildNeumorphicInputDecoration('Password'),
-                              obscureText: true,
-                            ),
-                          ),
-                          if (_authMode == AuthMode.SignUp)
-                            _isLoading
-                                ? const CircularProgressIndicator()
-                                : Column(
-                                    children: [
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      NeumorphicTextInputField(
-                                        textFormField: TextFormField(
-                                          onSaved: (value) =>
-                                              _authData['password'] = value!,
-                                          decoration:
-                                              buildNeumorphicInputDecoration(
-                                                  'confirm password'),
-                                          obscureText: true,
-                                          validator:
-                                              _authMode == AuthMode.SignUp
-                                                  ? (value) {
-                                                      if (value !=
-                                                          _passwordController
-                                                              .text) {
-                                                        return 'Passwords do not match';
-                                                      }
-                                                    }
-                                                  : null,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                          NeumorphicButton(
-                            onPressed: _submit,
-                            child: Text(
-                              _authMode == AuthMode.Login ? 'LOGIN' : 'SIGNUP',
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: _switchAuthMode,
-                            child: Text(
-                              '${_authMode == AuthMode.Login ? 'SIGN UP' : 'LOGIN'}'
-                              ' INSTEAD',
-                              style: TextStyle(
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .subtitle1!
-                                    .color,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                  child: buildForm(context),
                 ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Form buildForm(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            NeumorphicTextInputField(
+              textFormField: TextFormField(
+                onSaved: (value) => _authData['email'] = value!,
+                decoration: buildNeumorphicInputDecoration('Email'),
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  bool isValid = RegExp(
+                          r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                      .hasMatch(value!);
+                  if (value.isEmpty || !isValid) {
+                    return 'Invalid email!';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            NeumorphicTextInputField(
+              textFormField: TextFormField(
+                controller: _passwordController,
+                onSaved: (value) => _authData['password'] = value!,
+                decoration: buildNeumorphicInputDecoration('Password'),
+                obscureText: true,
+              ),
+            ),
+            if (_authMode == AuthMode.SignUp)
+              _isLoading
+                  ? const CircularProgressIndicator()
+                  : Column(
+                      children: [
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        NeumorphicTextInputField(
+                          textFormField: TextFormField(
+                            onSaved: (value) => _authData['password'] = value!,
+                            decoration: buildNeumorphicInputDecoration(
+                                'confirm password'),
+                            obscureText: true,
+                            validator: _authMode == AuthMode.SignUp
+                                ? (value) {
+                                    if (value != _passwordController.text) {
+                                      return 'Passwords do not match';
+                                    }
+                                  }
+                                : null,
+                          ),
+                        ),
+                      ],
+                    ),
+            const SizedBox(
+              height: 20,
+            ),
+            NeumorphicButton(
+              borderRadius: BorderRadius.circular(8.0),
+              width: double.infinity,
+              height: 40,
+              onPressed: _submit,
+              child: Text(
+                _authMode == AuthMode.Login ? 'LOGIN' : 'SIGNUP',
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: _switchAuthMode,
+              child: Text(
+                '${_authMode == AuthMode.Login ? 'SIGN UP' : 'LOGIN'}'
+                ' INSTEAD',
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.subtitle1!.color,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Column buildGreetings(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+          alignment: Alignment.topLeft,
+          child: Text(
+            'Hello!',
+            style: TextStyle(
+                fontSize: Theme.of(context).textTheme.headline4!.fontSize,
+                fontWeight: FontWeight.bold),
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          alignment: Alignment.topLeft,
+          child: Text(
+            'Welcome back',
+            style: TextStyle(
+              fontSize: Theme.of(context).textTheme.titleMedium!.fontSize,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Container buildLogo() {
+    return Container(
+      alignment: Alignment.centerRight,
+      child: NeumorphicCard(
+        shadowBlur: 20,
+        child: Container(
+          height: 100,
+          width: 100,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: Colors.grey[300],
+          ),
+          child: Image.asset(
+            'assets/img/logo.png',
+          ),
         ),
       ),
     );

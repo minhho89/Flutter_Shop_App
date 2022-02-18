@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 import 'package:shop_app_nojson/consts/routes.dart';
 import 'package:shop_app_nojson/providers/Auth.dart';
 import 'package:shop_app_nojson/providers/Cart.dart';
@@ -17,29 +18,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<SingleChildWidget> providers = [
+      ChangeNotifierProvider.value(value: Products()),
+      ChangeNotifierProvider.value(value: Cart()),
+      ChangeNotifierProvider.value(value: Auth()),
+      ChangeNotifierProxyProvider<Auth, Products>(
+          create: (ctx) => Products(),
+          update: (ctx, auth, previousProducts) {
+            print('Auth token = ${auth.token}');
+            return Products.auth(auth.userId, auth.token,
+                previousProducts == null ? [] : previousProducts.items);
+          }),
+      ChangeNotifierProxyProvider<Auth, Orders>(
+          create: (ctx) => Orders(),
+          update: (ctx, auth, previousOrders) => Orders.name(auth.userId,
+              auth.token, previousOrders == null ? [] : previousOrders.orders))
+    ];
+
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(value: Products()),
-        ChangeNotifierProvider.value(value: Cart()),
-        ChangeNotifierProvider.value(value: Auth()),
-        ChangeNotifierProxyProvider<Auth, Products>(
-            create: (ctx) => Products(),
-            update: (ctx, auth, previousProducts) {
-              print('Auth token = ${auth.token}');
-              return Products.auth(auth.userId, auth.token,
-                  previousProducts == null ? [] : previousProducts.items);
-            }),
-        ChangeNotifierProxyProvider<Auth, Orders>(
-            create: (ctx) => Orders(),
-            update: (ctx, auth, previousOrders) => Orders.name(
-                auth.userId,
-                auth.token,
-                previousOrders == null ? [] : previousOrders.orders)),
-      ],
+      providers: [...providers],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
+          title: 'Tan Tien shop app',
           theme: buildThemeData(),
           routes: routes,
           home: auth.isAuth()
