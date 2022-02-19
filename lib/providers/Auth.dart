@@ -47,11 +47,11 @@ class Auth with ChangeNotifier {
 
       _token = extractedData['idToken'];
       _userId = extractedData['localId'];
-      _expiryDate = DateTime.now().add(
-        Duration(
-          seconds: int.parse(extractedData['expiresIn']),
-        ),
-      );
+      _expiryDate = DateTime.now().add(Duration(
+        seconds: int.parse(extractedData['expiresIn']),
+
+        // Duration(hours: 1),
+      ));
 
       if (responseData['error'] != null) {
         print(responseData['error']);
