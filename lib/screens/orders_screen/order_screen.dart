@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app_nojson/consts/constants.dart';
 import 'package:shop_app_nojson/providers/Oders.dart';
+import 'package:shop_app_nojson/screens/orders_screen/components/order_item.dart'
+    as ord;
 import 'package:shop_app_nojson/widgets/app_appbar.dart';
-import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_card.dart';
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({Key? key}) : super(key: key);
@@ -38,18 +38,8 @@ class OrderScreen extends StatelessWidget {
               return Consumer<Orders>(
                 builder: (ctx, orderData, child) => ListView.builder(
                   itemCount: orderData.orders.length,
-                  itemBuilder: (ctx, i) => NeumorphicCard(
-                    shadowBlur: 10,
-                    borderRadius: BorderRadius.circular(10),
-                    backgroundColor: kBackgroundColor,
-                    child: ListTile(
-                      title: Text('${orderData.orders[i].amount}\$'),
-                      subtitle: Text(
-                        DateFormat('dd/MM/yyyy hh:mm')
-                            .format(orderData.orders[i].dateTime),
-                      ),
-                    ),
-                  ),
+                  itemBuilder: (ctx, i) =>
+                      ord.OrderItem(order: orderData.orders[i]),
                 ),
               );
             }
