@@ -5,11 +5,13 @@ import '../consts/constants.dart';
 import 'neumorphics/neumorphic_button.dart';
 
 class CusTomAppBar extends StatelessWidget with PreferredSizeWidget {
-  const CusTomAppBar({Key? key, this.actions, required this.context})
+  const CusTomAppBar(
+      {Key? key, this.actions, required this.context, this.titleText})
       : super(key: key);
 
   final List<Widget>? actions;
   final BuildContext context;
+  final String? titleText;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +20,12 @@ class CusTomAppBar extends StatelessWidget with PreferredSizeWidget {
       leadingWidth: 75,
       elevation: 0,
       backgroundColor: kBackgroundColor,
-      title: Text(
-        'Products',
-        style: TextStyle(color: Theme.of(context).primaryColor),
-      ),
+      title: titleText == null
+          ? Text('')
+          : Text(
+              titleText!,
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
       leading: buildLeadingButton(context),
       actions: [...?actions],
     );

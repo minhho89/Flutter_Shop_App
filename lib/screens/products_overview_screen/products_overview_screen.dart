@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_app_nojson/consts/constants.dart';
 import 'package:shop_app_nojson/providers/Cart.dart';
 import 'package:shop_app_nojson/screens/my_cart_screen/my_cart_screen.dart';
-import 'package:shop_app_nojson/widgets/app_appbar,.dart';
+import 'package:shop_app_nojson/widgets/app_appbar.dart';
 import 'package:shop_app_nojson/widgets/app_drawer.dart';
 import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_button.dart';
 
@@ -51,6 +51,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: CusTomAppBar(
+        titleText: 'Products',
         context: context,
         actions: [
           buildPopupMenuButton(),
