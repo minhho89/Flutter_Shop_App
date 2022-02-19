@@ -5,7 +5,6 @@ import 'package:shop_app_nojson/consts/constants.dart';
 import 'package:shop_app_nojson/providers/Cart.dart';
 import 'package:shop_app_nojson/screens/my_cart_screen/my_cart_screen.dart';
 import 'package:shop_app_nojson/widgets/app_appbar.dart';
-import 'package:shop_app_nojson/widgets/app_drawer.dart';
 import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_button.dart';
 
 import '../../providers/Products.dart';
@@ -93,13 +92,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Theme buildDrawer(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
-      child: const AppDrawer(),
     );
   }
 

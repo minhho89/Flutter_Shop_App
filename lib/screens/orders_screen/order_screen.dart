@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app_nojson/providers/Oders.dart';
-import 'package:shop_app_nojson/widgets/app_drawer.dart';
+import 'package:shop_app_nojson/widgets/app_appbar.dart';
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({Key? key}) : super(key: key);
@@ -15,12 +15,11 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('My Orders'),
+      appBar: CusTomAppBar(
+        context: context,
+        titleText: 'My Orders',
       ),
-      drawer: Theme(
-          data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
-          child: const AppDrawer(),),
+      drawer: buildDrawer(context),
       body: FutureBuilder(
         future: _refreshOrders(context),
         builder: (ctx, dataSnapshot) {

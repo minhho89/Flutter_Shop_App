@@ -21,7 +21,7 @@ class CusTomAppBar extends StatelessWidget with PreferredSizeWidget {
       elevation: 0,
       backgroundColor: kBackgroundColor,
       title: titleText == null
-          ? Text('')
+          ? const Text('')
           : Text(
               titleText!,
               style: TextStyle(color: Theme.of(context).primaryColor),
@@ -60,4 +60,11 @@ class CusTomAppBar extends StatelessWidget with PreferredSizeWidget {
   // TODO: implement preferredSize
   Size get preferredSize =>
       Size.fromHeight(MediaQuery.of(context).size.height * 1 / 10);
+}
+
+Theme buildDrawer(BuildContext context) {
+  return Theme(
+    data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
+    child: const AppDrawer(),
+  );
 }
