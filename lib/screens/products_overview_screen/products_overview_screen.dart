@@ -30,8 +30,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   bool _isLoading = false;
   bool _isInit = true;
 
-  var scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   void didChangeDependencies() {
     if (_isInit) {
@@ -53,7 +51,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: CusTomAppBar(
-        key: scaffoldKey,
         context: context,
         actions: [
           buildPopupMenuButton(),
@@ -137,23 +134,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                   child: Text('Show All'), value: FilterOptions.all),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Padding buildLeadingButton() {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: NeumorphicButton(
-        initialBlurRadius: 5,
-        tappedBlurRadius: 3,
-        borderRadius: BorderRadius.circular(8.0),
-        onPressed: () {
-          scaffoldKey.currentState?.openDrawer();
-        },
-        child: const Icon(
-          Icons.menu,
         ),
       ),
     );
