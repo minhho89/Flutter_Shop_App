@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app_nojson/consts/constants.dart';
 import 'package:shop_app_nojson/screens/add_new_screen/add_new_screen.dart';
+import 'package:shop_app_nojson/widgets/app_appbar.dart';
 import 'package:shop_app_nojson/widgets/app_drawer.dart';
+import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_button.dart';
 
 import '../../providers/Products.dart';
 
@@ -15,15 +18,21 @@ class UserProductScreen extends StatelessWidget {
     Products products = Provider.of<Products>(context, listen: false);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Products Management'),
+      backgroundColor: kBackgroundColor,
+      appBar: CusTomAppBar(
+        titleText: 'Products Management',
         actions: [
-          IconButton(
-            onPressed: () =>
-                Navigator.of(context).pushNamed(AddNewProductScreen.routeName),
-            icon: Icon(Icons.add),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: NeumorphicButton(
+              borderRadius: BorderRadius.circular(10),
+              onPressed: () => Navigator.of(context)
+                  .pushNamed(AddNewProductScreen.routeName),
+              child: const Icon(Icons.add),
+            ),
           ),
         ],
+        context: context,
       ),
       drawer: Theme(
         data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
