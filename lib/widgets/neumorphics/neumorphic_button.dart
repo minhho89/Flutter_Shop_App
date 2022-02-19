@@ -34,7 +34,7 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // behavior: HitTestBehavior.translucent, // for leading of appbar
+      behavior: HitTestBehavior.translucent,
       onTap: () {
         widget.onPressed();
       },
