@@ -35,7 +35,6 @@ class CusTomAppBar extends StatelessWidget with PreferredSizeWidget {
   }
 
   Padding buildLeadingButton(BuildContext context) {
-    var _key = key as GlobalKey<ScaffoldState>;
     return Padding(
       padding: const EdgeInsets.all(20),
       child: NeumorphicButton(
