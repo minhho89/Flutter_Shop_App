@@ -3,33 +3,37 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class NeumorphicGlass extends StatelessWidget {
-  const NeumorphicGlass({
+  NeumorphicGlass({
     Key? key,
     required this.blur,
     required this.opacity,
     required this.child,
+    this.borderRadius = BorderRadius.zero,
+    this.height,
+    this.width,
   }) : super(key: key);
 
   final double blur;
   final double opacity;
   final Widget child;
+  final BorderRadius? borderRadius;
+  final double? height;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: borderRadius,
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(opacity),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(20),
-            ),
-            border: Border.all(
-              width: 0,
-              color: Colors.white.withOpacity(0.2),
-            ),
+            borderRadius: borderRadius,
+            // border: Border.all(
+            //   width: 0,
+            //   color: Colors.white.withOpacity(0.2),
+            // ),
           ),
           child: child,
         ),

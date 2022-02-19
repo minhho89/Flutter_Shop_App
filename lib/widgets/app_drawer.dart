@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app_nojson/consts/constants.dart';
 import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_glass.dart';
 
 import '../screens/orders_screen/order_screen.dart';
@@ -14,11 +15,12 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: NeumorphicGlass(
-        opacity: 0.8,
-        blur: 8,
+        opacity: 0.6,
+        blur: 5,
         child: Column(
           children: [
             AppBar(
+              backgroundColor: kBackgroundColor,
               title: const Text('Hello!'),
             ),
             ListTile(
