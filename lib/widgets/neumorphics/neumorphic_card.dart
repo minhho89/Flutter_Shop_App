@@ -17,7 +17,7 @@ class NeumorphicCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(30),
+      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       // neumorphic design shadow
       decoration: BoxDecoration(borderRadius: borderRadius, boxShadow: [
         // top bottom right

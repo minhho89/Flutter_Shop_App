@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app_nojson/consts/constants.dart';
 import 'package:shop_app_nojson/providers/Oders.dart';
 import 'package:shop_app_nojson/widgets/app_appbar.dart';
+import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_card.dart';
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({Key? key}) : super(key: key);
@@ -15,6 +17,7 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackgroundColor,
       appBar: CusTomAppBar(
         context: context,
         titleText: 'My Orders',
@@ -35,11 +38,21 @@ class OrderScreen extends StatelessWidget {
               return Consumer<Orders>(
                 builder: (ctx, orderData, child) => ListView.builder(
                   itemCount: orderData.orders.length,
-                  itemBuilder: (ctx, i) => ListTile(
-                    title: Text('${orderData.orders[i].amount}\$'),
-                    subtitle: Text(
-                      DateFormat('dd/MM/yyyy hh:mm')
-                          .format(orderData.orders[i].dateTime),
+                  itemBuilder: (ctx, i) => NeumorphicCard(
+                    shadowBlur: 10,
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: kBackgroundColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ListTile(
+                        title: Text('${orderData.orders[i].amount}\$'),
+                        subtitle: Text(
+                          DateFormat('dd/MM/yyyy hh:mm')
+                              .format(orderData.orders[i].dateTime),
+                        ),
+                      ),
                     ),
                   ),
                 ),
