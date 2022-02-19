@@ -47,9 +47,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
           'title': _p.title,
           'description': _p.description,
           'price': _p.price.toString(),
-          'imageUrl': _p.imageUrl,
+          // 'imageUrl': _p.imageUrl,
         };
-        // _imageUrlController.text = _p.imageUrl;
+        _imageURLController.text = _p.imageUrl;
       }
     }
     _isInit = false;
@@ -67,6 +67,14 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
     setState(() {
       _isLoading = true;
     });
+
+    // update product
+    if (_p.id.isNotEmpty) {
+      await Provider.of<Products>(context, listen: false)
+          .updateProduct(_p.id, _p);
+      Navigator.of(context).pop();
+      return;
+    }
 
     // add product
     try {
@@ -126,6 +134,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                           child: NeumorphicTextInputField(
                             borderRadius: BorderRadius.circular(8),
                             textFormField: TextFormField(
+                                initialValue: _initValue['title'],
                                 decoration:
                                     buildNeumorphicInputDecoration('Title'),
                                 keyboardType: TextInputType.text,
@@ -147,6 +156,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                           child: NeumorphicTextInputField(
                             borderRadius: BorderRadius.circular(8),
                             textFormField: TextFormField(
+                                initialValue: _initValue['price'],
                                 decoration:
                                     buildNeumorphicInputDecoration('Price'),
                                 keyboardType: TextInputType.number,
@@ -168,12 +178,13 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                           child: NeumorphicTextInputField(
                             borderRadius: BorderRadius.circular(8),
                             textFormField: TextFormField(
+                                initialValue: _initValue['description'],
                                 keyboardType: TextInputType.multiline,
                                 maxLines: 3,
                                 decoration: buildNeumorphicInputDecoration(
                                     'Decoration'),
                                 textInputAction: TextInputAction.next,
-                                onFieldSubmitted: (_){
+                                onFieldSubmitted: (_) {
                                   setState(() {
                                     _saveForm();
                                   });
