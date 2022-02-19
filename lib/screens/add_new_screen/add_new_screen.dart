@@ -98,6 +98,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: kBackgroundColor,
+        drawer: buildDrawer(context),
         appBar: CusTomAppBar(
           context: context,
           titleText: 'Add new product',
@@ -120,61 +121,69 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                     key: _keyForm,
                     child: ListView(
                       children: [
-                        NeumorphicTextInputField(
-                          borderRadius: BorderRadius.circular(8),
-                          textFormField: TextFormField(
-                              decoration: const InputDecoration(
-                                label: Text('Title'),
-                              ),
-                              keyboardType: TextInputType.text,
-                              textInputAction: TextInputAction.next,
-                              onSaved: (value) {
-                                _p = Product(
-                                  title: value ?? '',
-                                  imageUrl: _p.imageUrl,
-                                  description: _p.description,
-                                  price: _p.price,
-                                  id: _p.id,
-                                  isFavorite: _p.isFavorite,
-                                );
-                              }),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: NeumorphicTextInputField(
+                            borderRadius: BorderRadius.circular(8),
+                            textFormField: TextFormField(
+                                decoration:
+                                    buildNeumorphicInputDecoration('Title'),
+                                keyboardType: TextInputType.text,
+                                textInputAction: TextInputAction.next,
+                                onSaved: (value) {
+                                  _p = Product(
+                                    title: value ?? '',
+                                    imageUrl: _p.imageUrl,
+                                    description: _p.description,
+                                    price: _p.price,
+                                    id: _p.id,
+                                    isFavorite: _p.isFavorite,
+                                  );
+                                }),
+                          ),
                         ),
-                        NeumorphicTextInputField(
-                          textFormField: TextFormField(
-                              decoration: const InputDecoration(
-                                label: Text('Price'),
-                              ),
-                              keyboardType: TextInputType.number,
-                              textInputAction: TextInputAction.next,
-                              onSaved: (value) {
-                                _p = Product(
-                                  title: _p.title,
-                                  imageUrl: _p.imageUrl,
-                                  description: _p.description,
-                                  price: double.parse(value ?? '0'),
-                                  id: _p.id,
-                                  isFavorite: _p.isFavorite,
-                                );
-                              }),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: NeumorphicTextInputField(
+                            borderRadius: BorderRadius.circular(8),
+                            textFormField: TextFormField(
+                                decoration:
+                                    buildNeumorphicInputDecoration('Price'),
+                                keyboardType: TextInputType.number,
+                                textInputAction: TextInputAction.next,
+                                onSaved: (value) {
+                                  _p = Product(
+                                    title: _p.title,
+                                    imageUrl: _p.imageUrl,
+                                    description: _p.description,
+                                    price: double.parse(value ?? '0'),
+                                    id: _p.id,
+                                    isFavorite: _p.isFavorite,
+                                  );
+                                }),
+                          ),
                         ),
-                        NeumorphicTextInputField(
-                          textFormField: TextFormField(
-                              keyboardType: TextInputType.multiline,
-                              maxLines: 3,
-                              decoration: const InputDecoration(
-                                label: Text('Decoration'),
-                              ),
-                              textInputAction: TextInputAction.next,
-                              onSaved: (value) {
-                                _p = Product(
-                                  title: _p.title,
-                                  imageUrl: _p.imageUrl,
-                                  description: value ?? '',
-                                  price: _p.price,
-                                  id: _p.id,
-                                  isFavorite: _p.isFavorite,
-                                );
-                              }),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: NeumorphicTextInputField(
+                            borderRadius: BorderRadius.circular(8),
+                            textFormField: TextFormField(
+                                keyboardType: TextInputType.multiline,
+                                maxLines: 3,
+                                decoration: buildNeumorphicInputDecoration(
+                                    'Decoration'),
+                                textInputAction: TextInputAction.next,
+                                onSaved: (value) {
+                                  _p = Product(
+                                    title: _p.title,
+                                    imageUrl: _p.imageUrl,
+                                    description: value ?? '',
+                                    price: _p.price,
+                                    id: _p.id,
+                                    isFavorite: _p.isFavorite,
+                                  );
+                                }),
+                          ),
                         ),
                         Row(
                           children: [
@@ -186,21 +195,24 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                 width: 100,
                                 height: 100,
                                 child: _imageURLController.text.isEmpty
-                                    ? const Text('Enter Image URL')
+                                    ? const Center(
+                                        child: Text(
+                                        'Enter Image URL',
+                                        textAlign: TextAlign.center,
+                                      ))
                                     : Image.network(_imageURLController.text,
                                         fit: BoxFit.fill),
                               ),
                             ),
                             Expanded(
                               child: NeumorphicTextInputField(
+                                borderRadius: BorderRadius.circular(8),
                                 textFormField: TextFormField(
                                     controller: _imageURLController,
                                     textInputAction: TextInputAction.done,
                                     keyboardType: TextInputType.url,
-                                    decoration: const InputDecoration(
-                                      label: Text('Image URL'),
-                                      enabledBorder: UnderlineInputBorder(),
-                                    ),
+                                    decoration: buildNeumorphicInputDecoration(
+                                        'Image Url'),
                                     onFieldSubmitted: (_) {
                                       setState(() {});
                                       _saveForm();

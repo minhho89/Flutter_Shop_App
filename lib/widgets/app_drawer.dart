@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app_nojson/consts/constants.dart';
 import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_glass.dart';
 
+import '../providers/Auth.dart';
 import '../screens/orders_screen/order_screen.dart';
 import '../screens/products_overview_screen/products_overview_screen.dart';
 import '../screens/user_product_screen/user_product_screen.dart';
@@ -42,6 +44,14 @@ class AppDrawer extends StatelessWidget {
               onTap: () => Navigator.of(context)
                   .pushReplacementNamed(UserProductScreen.routeName),
             ),
+            const Divider(),
+            ListTile(
+                title: const Text('Sign out'),
+                leading: const Icon(Icons.exit_to_app),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Provider.of<Auth>(context, listen: false).logout();
+                })
           ],
         ),
       ),

@@ -61,7 +61,11 @@ class _TotalRowState extends State<TotalRow> {
                 },
           child: _isLoading
               ? const CircularProgressIndicator()
-              : const Text('ORDER NOW'),
+              : Text(
+                  'ORDER NOW',
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                ),
         ),
       ],
     );
