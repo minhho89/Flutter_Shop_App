@@ -5,6 +5,7 @@ import 'package:shop_app_nojson/screens/add_new_screen/add_new_screen.dart';
 import 'package:shop_app_nojson/widgets/app_appbar.dart';
 import 'package:shop_app_nojson/widgets/app_drawer.dart';
 import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_button.dart';
+import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_card.dart';
 
 import '../../providers/Products.dart';
 
@@ -48,7 +49,10 @@ class UserProductScreen extends StatelessWidget {
                 child: Consumer<Products>(
                   builder: (ctx, productsData, _) => ListView.builder(
                     itemCount: products.items.length,
-                    itemBuilder: (context, index) => Card(
+                    itemBuilder: (context, index) => NeumorphicCard(
+                      backgroundColor: kBackgroundColor,
+                      shadowBlur: 13,
+                      borderRadius: BorderRadius.circular(10),
                       child: ListTile(
                         title: Text(products.items[index].title),
                         leading: CircleAvatar(
