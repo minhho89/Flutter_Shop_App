@@ -68,6 +68,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
             buildGreetings(context),
             NeumorphicCard(
               shadowBlur: 15,
+              backgroundColor: kBackgroundColor,
               child: Card(
                 color: kBackgroundColor,
                 elevation: 0,
@@ -212,17 +213,13 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
     return Container(
       alignment: Alignment.centerRight,
       child: NeumorphicCard(
+        width: 100,
+        height: 100,
+        backgroundColor: kBackgroundColor,
         shadowBlur: 20,
-        child: Container(
-          height: 100,
-          width: 100,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: Colors.grey[300],
-          ),
-          child: Image.asset(
-            'assets/img/logo.png',
-          ),
+        borderRadius: BorderRadius.circular(20),
+        child: Image.asset(
+          'assets/img/logo.png',
         ),
       ),
     );

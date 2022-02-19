@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 
 class NeumorphicCard extends StatelessWidget {
-  const NeumorphicCard(
-      {Key? key,
-      required this.child,
-      required this.shadowBlur,
-      this.alignment,
-      this.borderRadius = BorderRadius.zero})
-      : super(key: key);
+  const NeumorphicCard({
+    Key? key,
+    required this.child,
+    required this.shadowBlur,
+    this.alignment,
+    this.borderRadius = BorderRadius.zero,
+    required this.backgroundColor,
+    this.width,
+    this.height,
+  }) : super(key: key);
 
   final Widget child;
   final double shadowBlur;
   final Alignment? alignment;
   final BorderRadius? borderRadius;
+  final Color backgroundColor;
+  final double? height;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +39,14 @@ class NeumorphicCard extends StatelessWidget {
           blurRadius: shadowBlur,
         ),
       ]),
-      child: child,
+      child: Container(
+          height: height,
+          width: width,
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: borderRadius,
+          ),
+          child: child),
     );
   }
 }

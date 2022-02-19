@@ -41,17 +41,12 @@ class OrderScreen extends StatelessWidget {
                   itemBuilder: (ctx, i) => NeumorphicCard(
                     shadowBlur: 10,
                     borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: kBackgroundColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: ListTile(
-                        title: Text('${orderData.orders[i].amount}\$'),
-                        subtitle: Text(
-                          DateFormat('dd/MM/yyyy hh:mm')
-                              .format(orderData.orders[i].dateTime),
-                        ),
+                    backgroundColor: kBackgroundColor,
+                    child: ListTile(
+                      title: Text('${orderData.orders[i].amount}\$'),
+                      subtitle: Text(
+                        DateFormat('dd/MM/yyyy hh:mm')
+                            .format(orderData.orders[i].dateTime),
                       ),
                     ),
                   ),
