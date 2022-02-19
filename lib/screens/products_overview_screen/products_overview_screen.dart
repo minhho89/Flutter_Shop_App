@@ -61,21 +61,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           buildConsumerCart(context),
         ],
       ),
-      // appBar: AppBar(
-      //   toolbarHeight: MediaQuery.of(context).size.height * 1 / 10,
-      //   leadingWidth: 75,
-      //   elevation: 0,
-      //   backgroundColor: kBackgroundColor,
-      //   title: Text(
-      //     'Products',
-      //     style: TextStyle(color: Theme.of(context).primaryColor),
-      //   ),
-      //   leading: buildLeadingButton(),
-      //   actions: [
-      //     buildPopupMenuButton(),
-      //     buildConsumerCart(context),
-      //   ],
-      // ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : Body(
@@ -92,7 +77,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         child: NeumorphicButton(
           width: 40,
           height: 40,
-          borderRadius: BorderRadius.circular(3),
+          borderRadius: BorderRadius.circular(10),
           initialBlurRadius: 5,
           tappedBlurRadius: 3,
           onPressed: () =>
@@ -129,23 +114,30 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         height: 40,
         initialBlurRadius: 5,
         tappedBlurRadius: 3,
-        borderRadius: BorderRadius.circular(8.0),
-        child: PopupMenuButton(
-          onSelected: (FilterOptions selectedValue) {
-            setState(() {
-              if (selectedValue == FilterOptions.favorites) {
-                _showOnlyFavorites = true;
-              } else {
-                _showOnlyFavorites = false;
-              }
-            });
-          },
-          itemBuilder: (_) => [
-            const PopupMenuItem(
-                child: Text('Show Favorite'), value: FilterOptions.favorites),
-            const PopupMenuItem(
-                child: Text('Show All'), value: FilterOptions.all),
-          ],
+        borderRadius: BorderRadius.circular(10),
+        child: Theme(
+          // remove splash effect
+          data: Theme.of(context).copyWith(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+          ),
+          child: PopupMenuButton(
+            onSelected: (FilterOptions selectedValue) {
+              setState(() {
+                if (selectedValue == FilterOptions.favorites) {
+                  _showOnlyFavorites = true;
+                } else {
+                  _showOnlyFavorites = false;
+                }
+              });
+            },
+            itemBuilder: (_) => [
+              const PopupMenuItem(
+                  child: Text('Show Favorite'), value: FilterOptions.favorites),
+              const PopupMenuItem(
+                  child: Text('Show All'), value: FilterOptions.all),
+            ],
+          ),
         ),
       ),
     );
