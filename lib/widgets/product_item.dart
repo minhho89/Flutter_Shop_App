@@ -19,7 +19,7 @@ class ProductItem extends StatelessWidget {
     final auth = Provider.of<Auth>(context);
 
     return Container(
-      margin: EdgeInsets.only(top: 10.0),
+      margin: const EdgeInsets.only(top: 10.0),
       padding: const EdgeInsets.all(8.0),
       child: NeumorphicButton(
         onPressed: () {},
