@@ -84,7 +84,10 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               elevation: 0,
               badgeColor: Theme.of(context).primaryColor,
               position: BadgePosition.topEnd(),
-              badgeContent: Text(cart.quantityCount.toString()),
+              badgeContent: Text(
+                cart.quantityCount.toString(),
+                style: TextStyle(color: Theme.of(context).colorScheme.surface),
+              ),
               child: const Icon(
                 Icons.shopping_cart,
               ),

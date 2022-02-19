@@ -173,6 +173,11 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                                 decoration: buildNeumorphicInputDecoration(
                                     'Decoration'),
                                 textInputAction: TextInputAction.next,
+                                onFieldSubmitted: (_){
+                                  setState(() {
+                                    _saveForm();
+                                  });
+                                },
                                 onSaved: (value) {
                                   _p = Product(
                                     title: _p.title,

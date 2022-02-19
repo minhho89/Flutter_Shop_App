@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app_nojson/consts/constants.dart';
+import 'package:shop_app_nojson/screens/auth_screen/auth_screen.dart';
 import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_glass.dart';
 
 import '../providers/Auth.dart';
@@ -50,6 +51,8 @@ class AppDrawer extends StatelessWidget {
                 leading: const Icon(Icons.exit_to_app),
                 onTap: () {
                   Navigator.of(context).pop();
+                  Navigator.of(context)
+                      .pushReplacementNamed(AuthScreen.routeName);
                   Provider.of<Auth>(context, listen: false).logout();
                 })
           ],
