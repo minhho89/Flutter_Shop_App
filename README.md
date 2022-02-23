@@ -2,7 +2,7 @@
 
 Tan Tien is an e-commerse mobile application, using Neumorphic design in UI to improve UX.
 
->About the app name: 'Tân Tiến' (新進) is a Vietnamese word means　'rising' or 'up-and-coming'. It also was my grandfather's photography shop name. He opened the shop at a Southern Vietnamese countryside village, the shop was his life's pride until it closed when he passed away. Today, I would like to use the name in memory of him.
+>About the app name: 'Tân Tiến' (新進) is a Vietnamese word means　'rising' or 'up-and-coming'. It also was my grandfather's photography shop name. He opened the shop at a Southern Vietnamese countryside village named 'Rạch Gòi' in Hậu Giang province, the shop was his life's pride until it closed when he passed away. Today, I would like to use the name in memory of him.
 
 ## Features
 * Users can mark favorite, purchase products and publish their own products on shop.
