@@ -7,6 +7,6 @@ Users can mark favorite, purchase products and publish their own products on sho
 ### Screenshots
 <img src='screenShots/app_screen_1_login.gif' height='600em'> <img src='neumorphic_pic2.png' height='600em'> 
 <img src='screenShots/screenShot2_products.png' height='600em'> <img src='screenShots/screenShot3_drawer.png' height='600em'> 
-<img src='screenShots/screenshot4_user_product.png' height='600em'> <img src='neumorphic_pic2.png' height='600em'> 
+<img src='screenShots/screenshot4_user_product.png' height='600em'>
 
 
