@@ -6,8 +6,7 @@ import 'package:shop_app_nojson/providers/Auth.dart';
 import 'package:shop_app_nojson/providers/Cart.dart';
 import 'package:shop_app_nojson/providers/Oders.dart';
 import 'package:shop_app_nojson/providers/Products.dart';
-import 'package:shop_app_nojson/screens/auth_screen/auth_screen.dart';
-import 'package:shop_app_nojson/screens/products_overview_screen/products_overview_screen.dart';
+import 'package:shop_app_nojson/screens/product_screen/product_details.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,15 +42,16 @@ class MyApp extends StatelessWidget {
           title: 'Tan Tien shop app',
           theme: buildThemeData(),
           routes: routes,
-          home: auth.isAuth()
-              ? const ProductsOverviewScreen()
-              : FutureBuilder(
-                  future: auth.tryAutoLogin(),
-                  builder: (ctx, authResultSnapShot) =>
-                      authResultSnapShot.connectionState ==
-                              ConnectionState.waiting
-                          ? const Center(child: CircularProgressIndicator())
-                          : const AuthScreen()),
+          // home: auth.isAuth()
+          //     ? const ProductsOverviewScreen()
+          //     : FutureBuilder(
+          //         future: auth.tryAutoLogin(),
+          //         builder: (ctx, authResultSnapShot) =>
+          //             authResultSnapShot.connectionState ==
+          //                     ConnectionState.waiting
+          //                 ? const Center(child: CircularProgressIndicator())
+          //                 : const AuthScreen()),
+          home: const ProductDetailsScreen(),
         ),
       ),
     );
