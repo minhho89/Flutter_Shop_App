@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app_nojson/consts/constants.dart';
+import 'package:shop_app_nojson/screens/product_screen/product_details.dart';
 import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_button.dart';
 import 'package:shop_app_nojson/widgets/neumorphics/neumorphic_glass.dart';
 
@@ -25,7 +26,8 @@ class ProductItem extends StatelessWidget {
       child: Stack(
         children: [
           NeumorphicButton(
-            onPressed: () {},
+            onPressed: () =>
+                Navigator.of(context).pushNamed(ProductDetailsScreen.routeName),
             borderRadius: kProductCartBorderRadius,
             child: ClipRRect(
               borderRadius: kProductCartBorderRadius,
@@ -54,9 +56,12 @@ class ProductItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                child: Image.network(
-                  product.imageUrl,
-                  fit: BoxFit.cover,
+                child: Hero(
+                  tag: 'p_image',
+                  child: Image.network(
+                    product.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

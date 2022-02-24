@@ -27,10 +27,10 @@ class ProductDetailsScreen extends StatelessWidget {
                     height: MediaQuery.of(context).size.height * 1 / 3,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Hero(
-                        tag: 'p_image',
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Hero(
+                          tag:'p_image',
                           child: Image.network(
                               'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'),
                         ),
