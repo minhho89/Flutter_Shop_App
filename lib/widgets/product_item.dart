@@ -26,8 +26,9 @@ class ProductItem extends StatelessWidget {
       child: Stack(
         children: [
           NeumorphicButton(
-            onPressed: () =>
-                Navigator.of(context).pushNamed(ProductDetailsScreen.routeName),
+            onPressed: () => Navigator.of(context).pushNamed(
+                ProductDetailsScreen.routeName,
+                arguments: product.id),
             borderRadius: kProductCartBorderRadius,
             child: ClipRRect(
               borderRadius: kProductCartBorderRadius,
@@ -57,7 +58,7 @@ class ProductItem extends StatelessWidget {
                   ),
                 ),
                 child: Hero(
-                  tag: 'p_image',
+                  tag: product.id,
                   child: Image.network(
                     product.imageUrl,
                     fit: BoxFit.cover,
